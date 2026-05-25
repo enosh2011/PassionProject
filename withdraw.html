@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Withdraw</title>
+
+<link rel="stylesheet" href="portal.css">
+</head>
+
+<body>
+
+<div class="center-box">
+
+<h1>Withdraw Money</h1>
+
+<p id="balance">$5000</p>
+
+<input type="number" id="amount" placeholder="Enter amount">
+
+<button onclick="withdraw()">Withdraw</button>
+
+<button onclick="location.href='portal.html'">Back</button>
+
+</div>
+
+<script>
+
+let balance = localStorage.getItem("balance");
+
+if(balance === null){
+balance = 5000;
+} else {
+balance = Number(balance);
+}
+
+document.getElementById("balance").innerText = "$" + balance;
+
+function withdraw(){
+
+let amount = Number(document.getElementById("amount").value);
+
+if(amount > 0 && amount <= balance){
+
+balance -= amount;
+
+localStorage.setItem("balance", balance);
+
+document.getElementById("balance").innerText = "$" + balance;
+
+document.getElementById("amount").value = "";
+
+alert("Withdrawn $" + amount);
+
+} else {
+
+alert("Invalid amount");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

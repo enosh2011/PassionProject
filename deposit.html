@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Deposit</title>
+
+<link rel="stylesheet" href="portal.css">
+</head>
+
+<body>
+
+<div class="center-box">
+
+<h1>Deposit Money</h1>
+
+<p id="balance">$5000</p>
+
+<input type="number" id="amount" placeholder="Enter amount">
+
+<button onclick="deposit()">Deposit</button>
+
+<button onclick="location.href='portal.html'">Back</button>
+
+</div>
+
+<script>
+
+let balance = localStorage.getItem("balance");
+
+if(balance === null){
+balance = 5000;
+} else {
+balance = Number(balance);
+}
+
+document.getElementById("balance").innerText = "$" + balance;
+
+function deposit(){
+
+let amount = Number(document.getElementById("amount").value);
+
+if(amount > 0){
+
+balance += amount;
+
+localStorage.setItem("balance", balance);
+
+document.getElementById("balance").innerText = "$" + balance;
+
+document.getElementById("amount").value = "";
+
+alert("Deposited $" + amount);
+
+} else {
+
+alert("Enter valid amount");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

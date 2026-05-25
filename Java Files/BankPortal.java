@@ -34,6 +34,11 @@ public class BankPortal {
         System.out.println(center("TYPE 3 TO DEPOSIT", width));
         System.out.println(center("TYPE 4 TO EXIT BANK", width));
 
+        try {
+            
+        } catch (Exception e) {
+            
+        }
         String prompt = "Enter your choice: ";
         System.out.print(" ".repeat((width - prompt.length()) / 2) + prompt);
         int choice = scanner.nextInt();

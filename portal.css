@@ -1,48 +1,111 @@
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-.BANKINGPORTAL {
-    color: rgb(255, 255, 255);
+
+.card:hover {
+transform: translateY(-6px);
 }
-button {
-    border-radius: 4px;
-    background-color: #000000;
-    border: none;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 28px;
-    padding: 20px;
-    width: 200px;
-    font-weight: bold;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-  }
-  
-  .button span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
-  
-  .button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-  }
-  
-  .button:hover span {
-    padding-right: 25px;
-  }
-  
-  .button:hover span:after {
-    opacity: 1;
-    right: 0;
-  }
+
+body{
+margin:0;
+font-family:Arial;
+background:#f4f7fb;
+}
+
+.dashboard{
+display:flex;
+height:100vh;
+}
+
+.sidebar{
+width:250px;
+background:#0f172a;
+color:white;
+padding:30px;
+}
+
+.logo{
+font-size:28px;
+margin-bottom:40px;
+}
+
+.sidebar ul{
+list-style:none;
+padding:0;
+}
+
+.sidebar li{
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.sidebar li:hover{
+background:#1e293b;
+}
+
+.logout-btn{
+margin-top:30px;
+width:100%;
+padding:12px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+.main-content{
+flex:1;
+padding:40px;
+}
+
+.balance-card{
+background:#2563eb;
+color:white;
+padding:30px;
+border-radius:20px;
+margin-bottom:30px;
+}
+
+.balance-card h1{
+font-size:40px;
+}
+
+.actions{
+display:flex;
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+width:200px;
+text-align:center;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+button{
+margin-top:10px;
+padding:10px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+.center-box{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:15px;
+}
+
+input{
+padding:10px;
+width:200px;
+border-radius:8px;
+border:1px solid #ccc;
+}

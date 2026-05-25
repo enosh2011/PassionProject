@@ -1,23 +1,130 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
-    <title>Bank Portal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="portal.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bank Portal</title>
+
+<link rel="stylesheet" href="portal.css">
 </head>
+
 <body>
 
-        <div class="bg-image"></div>
-        <div class="bg-text">
-        <h1 class="BANKINGPORTAL">BANKING PORTAL</h1>
-        <div style="margin:auto;display:flex;flex-direction: column;justify-content: center;align-items: center;   height: 100vh;">
-        <a href="deposit.html"><button class="button"><span>DEPOSIT </span></button></a>
-        <a href = "withdraw.html"><button class = "button"><span>WITHDRAW</span></button></a>
-        <a href = "checkBalance.html"><button class = "button"><span>CHECK BALANCE</span></button></a>
-</div>
-        </div>
-</body>
+<div class="dashboard">
 
+<div class="sidebar">
+
+<h1 class="logo">NovaBank</h1>
+
+<ul>
+<li class="active">Dashboard</li>
+<li>Accounts</li>
+<li>Transactions</li>
+<li>Settings</li>
+</ul>
+
+<a href="index.html"><button class="logout-btn"><span>Log Out</span></button></a> 
+
+</div>
+
+<div class="main-content">
+
+<div class="top">
+<h2>Dashboard</h2>
+</div>
+
+<div class="balance-card">
+
+<div>
+<p>Total Balance</p>
+<h1 id="balance">$5000</h1>
+</div>
+
+</div>
+
+<div class="bank-card">
+
+<div class="bank-card-top">
+<span>Bank</span>
+<span>Platinum</span>
+</div>
+
+<div class="bank-card-number">
+**** **** **** 4829
+</div>
+
+<div class="bank-card-bottom">
+<span>VALID 09/28</span>
+<span>ENOSH</span>
+</div>
+
+</div>
+
+<div class="actions">
+
+<div class="card">
+<h3>Deposit</h3>
+<p>Add money to your account instantly.</p>
+<button onclick="location.href='deposit.html'">-></button>
+</div>
+
+<div class="card">
+<h3>Withdraw</h3>
+<p>Withdraw funds from your account.</p>
+<button onclick="location.href='withdraw.html'">-></button>
+</div>
+
+</div>
+
+<div class="transactions">
+
+<h2>Recent Activity</h2>
+
+<div id="transactionList"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let balance = localStorage.getItem("balance");
+if(balance === null){
+balance = 5000;
+} else {
+balance = Number(balance);
+}
+
+document.getElementById("balance").innerText = "$" + balance;
+
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+let list = document.getElementById("transactionList");
+
+transactions.reverse().forEach(t => {
+
+let div = document.createElement("div");
+div.classList.add("transaction");
+
+div.innerHTML = `
+<div>
+<h4>${t.type}</h4>
+<p>${t.time}</p>
+</div>
+<span class="${t.color}">
+${t.amount}
+</span>
+`;
+
+list.appendChild(div);
+
+});
+
+</script>
+
+</body>
 </html>
