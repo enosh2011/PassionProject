@@ -16,77 +16,73 @@
 
 <div class="sidebar">
 
-<h1 class="logo">NovaBank</h1>
+<h1 class="logo">BANKING SIMULATOR</h1>
 
 <ul>
 <li class="active">Dashboard</li>
-<li>Accounts</li>
-<li>Transactions</li>
-<li>Settings</li>
+<li onclick="location.href='account.html'">Account</li>
+<li onclick="location.href='transactions.html'">Transactions</li>
+<li onclick="location.href='settings.html'">Settings</li>
 </ul>
 
-<a href="index.html"><button class="logout-btn"><span>Log Out</span></button></a> 
+<button class="logout-btn" onclick="logout()">Log Out</button>
 
 </div>
 
 <div class="main-content">
 
-<div class="top">
-<h2>Dashboard</h2>
-</div>
+  <div class="top">
+      <h2>Dashboard</h2>
+  </div>
 
-<div class="balance-card">
-
-<div>
-<p>Total Balance</p>
-<h1 id="balance">$5000</h1>
-</div>
-
-</div>
-
-<div class="bank-card">
-
-<div class="bank-card-top">
-<span>Bank</span>
-<span>Platinum</span>
-</div>
-
-<div class="bank-card-number">
-**** **** **** 4829
-</div>
-
-<div class="bank-card-bottom">
-<span>VALID 09/28</span>
-<span>ENOSH</span>
-</div>
-
-</div>
+  <div class="balance-card">
+      <div>
+          <p>Total Balance</p>
+          <h1 id="balance">$5000</h1>
+      </div>
+  </div>
 
 <div class="actions">
 
-<div class="card">
-<h3>Deposit</h3>
-<p>Add money to your account instantly.</p>
-<button onclick="location.href='deposit.html'">-></button>
-</div>
+  <div class="card big-card">
+      <h3>Deposit</h3>
+      <p>Add money to your account instantly.</p>
+          <button onclick="location.href='deposit.html'">Deposit</button>
+      </div>
 
-<div class="card">
-<h3>Withdraw</h3>
-<p>Withdraw funds from your account.</p>
-<button onclick="location.href='withdraw.html'">-></button>
-</div>
+      <div class="card big-card">
+          <h3>Withdraw</h3>
+          <p>Withdraw funds from your account.</p>
+          <button onclick="location.href='withdraw.html'">Withdraw</button>
+      </div>
 
-</div>
+  </div>
 
-<div class="transactions">
+  <div class="transactions">
 
-<h2>Recent Activity</h2>
+      <h2>Recent Activity</h2>
 
-<div id="transactionList"></div>
+      <div id="transactionList">
 
-</div>
+          <div class="transaction">
 
-</div>
+            <div>
+              <h4>Amazon</h4>
+              <p>Today</p>
+            </div>
+              <span class="expense">-$24.99</span>
+          </div>
+
+          <div class="transaction">
+            <div>
+              <h4>Paycheck</h4>
+              <p>2 days ago</p>
+            </div>
+              <span class="income">+$1,200.00</span>
+          </div>
+      </div>
+
+  </div>
 
 </div>
 
@@ -126,5 +122,16 @@ list.appendChild(div);
 
 </script>
 
+
+<script src="https://cdn.auth0.com/js/auth0-spa-js/2.18/auth0-spa-js.production.js"></script>
+
+<script>
+    function logout() {
+      window.location.href =
+        "https://bankingsimulator.ca.auth0.com/v2/logout?returnTo=" +
+        encodeURIComponent(window.location.origin + "/index.html") +
+        "&client_id=aPg9tnBgnEsj6wQhJeftU2F859Gyz90w";
+    }
+    </script>
 </body>
 </html>

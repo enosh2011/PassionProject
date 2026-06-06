@@ -1,0 +1,61 @@
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6f9;
+}
+
+.container{
+    width:700px;
+    margin:40px auto;
+}
+
+h1{
+    text-align:center;
+    color:#1e3c72;
+    margin-bottom:30px;
+}
+
+.transaction{
+    background:white;
+    padding:15px;
+    margin-bottom:12px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.transaction h3{
+    margin:0;
+}
+
+.transaction p{
+    margin:5px 0;
+    color:gray;
+}
+
+.income{
+    color:green;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.expense{
+    color:red;
+    font-weight:bold;
+    font-size:18px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    background:#1e3c72;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2a5298;
+}

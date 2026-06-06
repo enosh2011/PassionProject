@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login / Signup</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .login {
+      background: #1e3c72;
+      color: white;
+    }
+
+    .signup {
+      background: #2a5298;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Bank Login</h2>
+  <button class="login" onclick="login()">Login</button>
+  <button class="signup" onclick="signup()">Sign Up</button>
+</div>
+
+<script src="https://cdn.auth0.com/js/auth0-spa-js/2.18/auth0-spa-js.production.js"></script>
+
+<script>
+
+let client;
+
+(async () => {
+
+  client = await auth0.createAuth0Client({
+    domain: "bankingsimulator.ca.auth0.com",
+    clientId: "aPg9tnBgnEsj6wQhJeftU2F859Gyz90w",
+
+    authorizationParams: {
+      redirect_uri: window.location.origin + "/login-signup.html"
+    }
+  });
+
+  if (location.search.includes("code=") && location.search.includes("state=")) {
+    await client.handleRedirectCallback();
+
+    window.history.replaceState({}, document.title, "/login-signup.html");
+
+    window.location.href = "portal.html";
+    return;
+  }
+
+  if (await client.isAuthenticated()) {
+    window.location.href = "portal.html";
+    return;
+  }
+
+})();
+
+async function login() {
+  await client.loginWithRedirect();
+}
+
+async function signup() {
+  await client.loginWithRedirect({
+    authorizationParams: {
+      screen_hint: "signup"
+    }
+  });
+}
+
+</script>
+
+</body>
+</html>
