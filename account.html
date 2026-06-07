@@ -1,87 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Account</title>
-    <link rel="stylesheet" href="account.css">
-</head>
-<body>
-
-<div class="center-box">
-
-    <h1>My Account</h1>
-
-    <p><strong>Name:</strong> <span id="name">Loading...</span></p>
-
-    <p><strong>Email:</strong> <span id="email">Loading...</span></p>
-
-    <p><strong>User ID:</strong> <span id="userid">Loading...</span></p>
-
-    <p><strong>Balance:</strong> <span id="balance">$0</span></p>
-
-    <button onclick="location.href='portal.html'">Back</button>
-
-</div>
-
 <script src="https://cdn.auth0.com/js/auth0-spa-js/2.18/auth0-spa-js.production.js"></script>
 
 <script>
-
 (async () => {
 
-    try {
+  const client = await auth0.createAuth0Client({
+    domain: "bankingsimulator.ca.auth0.com",
+    clientId: "aPg9tnBgnEsj6wQhJeftU2F859Gyz90w"
+  });
 
-        const client = await auth0.createAuth0Client({
-            domain: "bankingsimulator.ca.auth0.com",
-            clientId: "aPg9tnBgnEsj6wQhJeftU2F859Gyz90w",
-            authorizationParams: {
-                redirect_uri: window.location.origin + "/login-signup.html"
-            }
-        });
+  // check login
+  const isLoggedIn = await client.isAuthenticated();
 
-        const isLoggedIn = await client.isAuthenticated();
+  if (!isLoggedIn) {
+    window.location.href = "login-signup.html";
+    return;
+  }
 
-        if (!isLoggedIn) {
+  // get user AFTER login check
+  const user = await client.getUser();
 
-            document.getElementById("name").innerText = "Not Logged In";
-            document.getElementById("email").innerText = "Not Logged In";
-            document.getElementById("userid").innerText = "Not Logged In";
+  // DEBUG (optional)
+  console.log("USER:", user);
 
-            return;
-        }
+  // fill page
+  document.getElementById("name").innerText = user.name || "Not Available";
+  document.getElementById("email").innerText = user.email || "Not Available";
+  document.getElementById("userid").innerText = user.sub;
 
-        const user = await client.getUser();
+  // balance
+  let balance = localStorage.getItem("balance");
+  if (!balance) balance = 5000;
 
-        document.getElementById("name").innerText =
-            user.name || "No Name";
-
-        document.getElementById("email").innerText =
-            user.email || "No Email";
-
-        document.getElementById("userid").innerText =
-            user.sub || "No ID";
-
-        let balance = localStorage.getItem("balance");
-
-        if (balance === null) {
-            balance = 5000;
-        }
-
-        document.getElementById("balance").innerText =
-            "$" + balance;
-
-    } catch (error) {
-
-        console.error(error);
-
-        document.getElementById("name").innerText = "Error";
-        document.getElementById("email").innerText = error.message;
-        document.getElementById("userid").innerText = "Check Console";
-
-    }
+  document.getElementById("balance").innerText = "$" + balance;
 
 })();
-
 </script>
-
-</body>
-</html>
