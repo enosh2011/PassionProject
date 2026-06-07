@@ -126,12 +126,11 @@ list.appendChild(div);
 <script src="https://cdn.auth0.com/js/auth0-spa-js/2.18/auth0-spa-js.production.js"></script>
 
 <script>
-    function logout() {
-      window.location.href =
-        "https://bankingsimulator.ca.auth0.com/v2/logout?returnTo=" +
-        encodeURIComponent(window.location.origin + "/index.html") +
-        "&client_id=aPg9tnBgnEsj6wQhJeftU2F859Gyz90w";
-    }
-    </script>
+function logout() {
+  window.location.href =
+    "https://bankingsimulator.ca.auth0.com/v2/logout?client_id=aPg9tnBgnEsj6wQhJeftU2F859Gyz90w&returnTo=" +
+    encodeURIComponent("https://enosh2011.github.io/PassionProject/login-signup.html");
+}
+</script>
 </body>
 </html>
