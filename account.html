@@ -1,37 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Account</title>
+    <link rel="stylesheet" href="account.css">
+</head>
+
+<body>
+
+<div class="center-box">
+
+    <h1>My Account</h1>
+
+    <p><strong>Name:</strong> <span id="name">Loading...</span></p>
+    <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+    <p><strong>User ID:</strong> <span id="userid">Loading...</span></p>
+    <p><strong>Balance:</strong> <span id="balance">$0</span></p>
+
+    <button onclick="location.href='portal.html'">Back</button>
+
+</div>
+
 <script src="https://cdn.auth0.com/js/auth0-spa-js/2.18/auth0-spa-js.production.js"></script>
 
 <script>
 (async () => {
 
-  const client = await auth0.createAuth0Client({
-    domain: "bankingsimulator.ca.auth0.com",
-    clientId: "aPg9tnBgnEsj6wQhJeftU2F859Gyz90w"
-  });
+    try {
 
-  // check login
-  const isLoggedIn = await client.isAuthenticated();
+        const client = await auth0.createAuth0Client({
+            domain: "bankingsimulator.ca.auth0.com",
+            clientId: "aPg9tnBgnEsj6wQhJeftU2F859Gyz90w"
+        });
 
-  if (!isLoggedIn) {
-    window.location.href = "login-signup.html";
-    return;
-  }
+        // 🔥 restore session properly
+        await client.getTokenSilently().catch(() => {});
 
-  // get user AFTER login check
-  const user = await client.getUser();
+        const loggedIn = await client.isAuthenticated();
 
-  // DEBUG (optional)
-  console.log("USER:", user);
+        // if not logged in → send to portal (your home page)
+        if (!loggedIn) {
+            window.location.href = "portal.html";
+            return;
+        }
 
-  // fill page
-  document.getElementById("name").innerText = user.name || "Not Available";
-  document.getElementById("email").innerText = user.email || "Not Available";
-  document.getElementById("userid").innerText = user.sub;
+        const user = await client.getUser();
 
-  // balance
-  let balance = localStorage.getItem("balance");
-  if (!balance) balance = 5000;
+        document.getElementById("name").innerText = user.name || "Not Available";
+        document.getElementById("email").innerText = user.email || "Not Available";
+        document.getElementById("userid").innerText = user.sub;
 
-  document.getElementById("balance").innerText = "$" + balance;
+        let balance = localStorage.getItem("balance");
+        if (!balance) balance = 5000;
+
+        document.getElementById("balance").innerText = "$" + balance;
+
+    } catch (err) {
+        console.error("Account page error:", err);
+        document.body.innerHTML = "<h2>Error loading account page</h2>";
+    }
 
 })();
 </script>
+
+</body>
+</html>
