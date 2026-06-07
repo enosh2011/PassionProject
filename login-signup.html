@@ -64,23 +64,25 @@ let client;
   client = await auth0.createAuth0Client({
     domain: "bankingsimulator.ca.auth0.com",
     clientId: "aPg9tnBgnEsj6wQhJeftU2F859Gyz90w",
-
     authorizationParams: {
-      redirect_uri: window.location.origin + "/login-signup.html"
+      redirect_uri: "https://enosh2011.github.io/PassionProject/login-signup.html"
     }
   });
 
+  // handle callback
   if (location.search.includes("code=") && location.search.includes("state=")) {
     await client.handleRedirectCallback();
 
-    window.history.replaceState({}, document.title, "/login-signup.html");
+    window.history.replaceState({}, document.title, "/PassionProject/login-signup.html");
 
-    window.location.href = "portal.html";
+    // IMPORTANT FIX
+    window.location.href = "https://enosh2011.github.io/PassionProject/portal.html";
     return;
   }
 
+  // already logged in
   if (await client.isAuthenticated()) {
-    window.location.href = "portal.html";
+    window.location.href = "https://enosh2011.github.io/PassionProject/portal.html";
     return;
   }
 
